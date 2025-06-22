@@ -54,7 +54,7 @@ npm install
 
 1. **Run the server in development**
 ```bash
-git clone https://github.com/your-username/library-management-system.git
+git clone https://github.com/Joyanti-Chowdhury/library-management-system
 cd library-management-system
 
 
@@ -82,3 +82,5 @@ POST /api/return – Return a book
 
 (More detailed API documentation can be generated using Swagger/Postman collection)
 
+ project vedio link
+ https://drive.google.com/drive/u/0/folders/1ib4-m6j6rAsPju3zHOa9upmLxhJN49a2?lfhs=2
