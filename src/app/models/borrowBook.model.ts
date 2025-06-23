@@ -4,7 +4,7 @@ import { IBorrowBook } from "../interfaces/borrowBook.interface";
 
 const borrowBookSchema = new Schema<IBorrowBook>(
     {
-        _id: {type: String, required: true},
+        book:  Schema.Types.ObjectId,
         quantity: {type: Number, required: true},
         dueDate: {type: Date, required: true},
     },

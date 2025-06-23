@@ -1,6 +1,7 @@
+import { Types } from "mongoose"
 
 export interface IBorrowBook {
-    _id: string,
+    book:Types.ObjectId
     // title: string,
     // author: string,
     // genre: string,
@@ -10,6 +11,7 @@ export interface IBorrowBook {
     // available: boolean,
     // borrowedBy: string,
     // borrowedDate: Date,
+      updateAvailability(): void;
     quantity: number,
     dueDate: Date
 }

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BorrowBook = void 0;
 const mongoose_1 = require("mongoose");
 const borrowBookSchema = new mongoose_1.Schema({
-    _id: { type: String, required: true },
+    book: mongoose_1.Schema.Types.ObjectId,
     quantity: { type: Number, required: true },
     dueDate: { type: Date, required: true },
 }, {

@@ -36,38 +36,115 @@ exports.bookRoutes.post("/create-book", (req, res) => __awaiter(void 0, void 0, 
     }
 }));
 exports.bookRoutes.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const data = yield books_model_1.Data.find();
-    res.status(201).json({
-        success: true,
-        message: "Book retrieved successfully",
-        data
-    });
+    try {
+        const bookGenre = req.query.genre ? req.query.genre : "";
+        console.log(bookGenre);
+        //    const data = await Data.find()
+        let data = [];
+        if (bookGenre) {
+            data = yield books_model_1.Data.find({ genre: bookGenre });
+        }
+        else {
+            data = yield books_model_1.Data.find();
+        }
+        data = yield books_model_1.Data.find().sort({ createdAt: 1 });
+        data = yield books_model_1.Data.find().limit(5);
+        res.status(201).json({
+            success: true,
+            message: "Book retrieved successfully",
+            data
+        });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(400).json({
+            message: "Validation Failed",
+            success: false,
+            error
+        });
+    }
 }));
 exports.bookRoutes.get("/:bookId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const bookId = req.params.bookId;
-    const data = yield books_model_1.Data.findById(bookId);
-    res.status(201).json({
-        success: true,
-        message: "Book retrieved successfully",
-        data
-    });
+    try {
+        const bookId = req.params.bookId;
+        const data = yield books_model_1.Data.findById(bookId);
+        res.status(201).json({
+            success: true,
+            message: "Book retrieved successfully",
+            data
+        });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(400).json({
+            message: "Validation Failed",
+            success: false,
+            error
+        });
+    }
 }));
 exports.bookRoutes.patch("/:bookId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const bookId = req.params.bookId;
-    const updatedBody = req.body;
-    const data = yield books_model_1.Data.findByIdAndUpdate(bookId, updatedBody, { new: true });
-    res.status(201).json({
-        success: true,
-        message: "Book  updated  successfully",
-        data
-    });
+    try {
+        const bookId = req.params.bookId;
+        const updatedBody = req.body;
+        const data = yield books_model_1.Data.findByIdAndUpdate(bookId, updatedBody, { new: true });
+        res.status(201).json({
+            success: true,
+            message: "Book  updated  successfully",
+            data
+        });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(400).json({
+            message: "Update Validation Failed",
+            success: false,
+            error
+        });
+    }
 }));
+// bookRoutes.post("/borrow", async (req : Request, res : Response ) => {
+//  try {
+//     const { book: bookId, quantity, dueDate } = req.body;
+//     const book = await Data.findById(bookId);
+//     if (!book) {
+//       return res.status(404).json({ success: false, message: 'Book not found' });
+//     }
+//     if (book.copies < quantity) {
+//       return res.status(400).json({ success: false, message: 'Not enough copies available' });
+//     }
+//     // Update book copies and availability
+//     book.copies -= quantity;
+//     book.updateAvailability();
+//     await book.save();
+//     // Create borrow record
+//     const borrowRecord = await BorrowBook.create({ book: bookId, quantity, dueDate });
+//     return res.status(201).json({
+//       success: true,
+//       message: 'Book borrowed successfully',
+//       data: borrowRecord
+//     });
+//   } catch (error) {
+//     console.error('Borrow error:', error);
+//     return res.status(500).json({ success: false, message: 'Internal server error' });
+//   }
+// })
 exports.bookRoutes.delete("/:BookId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const bookId = req.params.bookId;
-    const data = yield books_model_1.Data.findByIdAndDelete(bookId);
-    res.status(201).json({
-        success: true,
-        message: "Book deleted successfully",
-        data
-    });
+    try {
+        const bookId = req.params.bookId;
+        const data = yield books_model_1.Data.findByIdAndDelete(bookId);
+        res.status(201).json({
+            success: true,
+            message: "Book deleted successfully",
+            data
+        });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(400).json({
+            message: "Delete Validation Failed",
+            success: false,
+            error
+        });
+    }
 }));

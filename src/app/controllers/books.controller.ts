@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import {  Data } from '../models/books.model';
+import { BorrowBook } from '../models/borrowBook.model';
 
 export const bookRoutes = express.Router();
 
@@ -25,10 +26,22 @@ bookRoutes.post("/create-book",async (req : Request, res : Response ) => {
     })
   }
 })
+
+
 bookRoutes.get("/",async (req : Request, res : Response ) => {
    try {
-    
-    const data = await Data.find()
+    const bookGenre  =  req.query.genre ? req.query.genre : "";
+    console.log(bookGenre)
+//    const data = await Data.find()
+ let data = []
+    if (bookGenre) {
+          data = await Data.find({genre:bookGenre})
+    } else {
+        data = await Data.find()
+    }
+   
+    data = await Data.find().sort({createdAt: 1})
+    data = await Data.find().limit(5)
 
     res.status(201).json({
         success: true,
@@ -89,6 +102,18 @@ bookRoutes.patch("/:bookId",async (req : Request, res : Response ) => {
     })
   }
 })
+
+
+
+
+
+
+
+
+
+
+
+
 bookRoutes.delete("/:BookId",async (req : Request, res : Response ) => {
 
   try {
