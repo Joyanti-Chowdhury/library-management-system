@@ -6,7 +6,8 @@ export const bookRoutes = express.Router();
 
 
 bookRoutes.post("/create-book",async (req : Request, res : Response ) => {
-    const body = req.body;
+  try {
+      const body = req.body;
     const data = await Data.create(body)
 
     res.status(201).json({
@@ -14,6 +15,15 @@ bookRoutes.post("/create-book",async (req : Request, res : Response ) => {
         message: "Book created successfully",
      data
     })
+  } catch (error : any) {
+    console.log(error)
+    res.status(400).json({
+      
+        message: "Validation Failed",
+          success: false,
+        error
+    })
+  }
 })
 bookRoutes.get("/",async (req : Request, res : Response ) => {
    const data = await Data.find()

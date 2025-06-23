@@ -6,9 +6,9 @@ const bookSchema = new Schema<IBook>({
     title: {type: String, required: true},
     author: {type: String, required: true},
     genre: {type: String,
-   
-          enum:["Fiction" , "Non-Fiction" , "Science", "History" , "Biography" ,"Fantasy"],
-          default: "Fiction",
+      uppercase: true,
+          enum:["FICTION" , "NON-FICTION" , "SCIENCE", "HISTORY" , "BIOGRAPHY" ,"FANTASY"],
+          default: "FICTION",
           required: true
        },
     isbn: {type: String, required: true},
