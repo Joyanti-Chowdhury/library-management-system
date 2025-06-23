@@ -6,7 +6,8 @@ const bookSchema = new Schema<IBook>({
     title: {type: String, required: true},
     author: {type: String, required: true},
     genre: {type: String,
-          enum:["Fiction" , "Non-Fiction" ,"science","histroy" , "Biography" ,"Fantasy"],
+   
+          enum:["Fiction" , "Non-Fiction" , "Science", "History" , "Biography" ,"Fantasy"],
           default: "Fiction",
           required: true
        },
@@ -24,4 +25,4 @@ const bookSchema = new Schema<IBook>({
 })
 
 
-export  const Book = model<IBook>("Book", bookSchema)
+export  const Data = model<IBook>("Data", bookSchema)
