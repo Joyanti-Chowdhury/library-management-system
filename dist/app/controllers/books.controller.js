@@ -17,63 +17,57 @@ const express_1 = __importDefault(require("express"));
 const books_model_1 = require("../models/books.model");
 exports.bookRoutes = express_1.default.Router();
 exports.bookRoutes.post("/create-book", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const body = req.body;
-    //noteRoutesroach 1 of creating data
-    // const myBook = new Book({
-    //     title : "Learning Express",
-    //     author : "Joyantichowdhury",
-    //     genre : "Fiction",
-    //     isbn : "123456789",
-    //     description : "This is a book about express",
-    //     copies : 10,
-    //     available : true
-    // })
-    // await myBook.save()
-    const book = yield books_model_1.Book.create(body);
-    res.status(201).json({
-        success: true,
-        message: "Book created successfully",
-        book
-    });
+    try {
+        const body = req.body;
+        const data = yield books_model_1.Data.create(body);
+        res.status(201).json({
+            success: true,
+            message: "Book created successfully",
+            data
+        });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(400).json({
+            message: "Validation Failed",
+            success: false,
+            error
+        });
+    }
 }));
 exports.bookRoutes.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const books = yield books_model_1.Book.find();
-    // const note = await Note.create(notes)
+    const data = yield books_model_1.Data.find();
     res.status(201).json({
         success: true,
-        message: "Book created successfully",
-        books
+        message: "Book retrieved successfully",
+        data
     });
 }));
 exports.bookRoutes.get("/:bookId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const bookId = req.params.bookId;
-    const book = yield books_model_1.Book.findById(bookId);
+    const data = yield books_model_1.Data.findById(bookId);
     res.status(201).json({
         success: true,
-        message: "Book created successfully",
-        book
+        message: "Book retrieved successfully",
+        data
     });
 }));
 exports.bookRoutes.patch("/:bookId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const bookId = req.params.bookId;
     const updatedBody = req.body;
-    const book = yield books_model_1.Book.findByIdAndUpdate(bookId, updatedBody, { new: true });
-    //    const note = await Note.findByIdAndUpdate({_id: noteId},updatedBody ,{new: true})
-    //    const note = await Note.updateOne({_id: noteId},updatedBody ,{new: true})
+    const data = yield books_model_1.Data.findByIdAndUpdate(bookId, updatedBody, { new: true });
     res.status(201).json({
         success: true,
-        message: "Book created successfully",
-        book
+        message: "Book  updated  successfully",
+        data
     });
 }));
 exports.bookRoutes.delete("/:BookId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const bookId = req.params.bookId;
-    const book = yield books_model_1.Book.findByIdAndDelete(bookId);
-    //    const note = await Note.findByIdAndDelete({_id: noteId})
-    //    const note = await Note.deleteOne({_id: noteId})
+    const data = yield books_model_1.Data.findByIdAndDelete(bookId);
     res.status(201).json({
         success: true,
         message: "Book deleted successfully",
-        book
+        data
     });
 }));

@@ -26,19 +26,28 @@ bookRoutes.post("/create-book",async (req : Request, res : Response ) => {
   }
 })
 bookRoutes.get("/",async (req : Request, res : Response ) => {
-   const data = await Data.find()
-      
-   
-
+   try {
+    
+    const data = await Data.find()
 
     res.status(201).json({
         success: true,
         message: "Book retrieved successfully",
     data
     })
+   } catch (error) {
+    console.log(error)
+    res.status(400).json({
+      
+        message: "Validation Failed",
+          success: false,
+        error
+    })
+   }
 })
 bookRoutes.get("/:bookId",async (req : Request, res : Response ) => {
-   const bookId  = req.params.bookId;
+   try {
+    const bookId  = req.params.bookId;
    const data = await Data.findById(bookId)
       
    
@@ -47,10 +56,20 @@ bookRoutes.get("/:bookId",async (req : Request, res : Response ) => {
         message: "Book retrieved successfully",
        data
     })
+   } catch (error) {
+     console.log(error)
+    res.status(400).json({
+      
+        message: "Validation Failed",
+          success: false,
+        error
+    })
+   }
 })
 bookRoutes.patch("/:bookId",async (req : Request, res : Response ) => {
 
-   const bookId  = req.params.bookId;
+  try {
+     const bookId  = req.params.bookId;
    const updatedBody = req.body
    const data = await Data.findByIdAndUpdate(bookId,updatedBody ,{new: true})
       
@@ -60,10 +79,20 @@ bookRoutes.patch("/:bookId",async (req : Request, res : Response ) => {
         message: "Book  updated  successfully",
      data
     })
+  } catch (error) {
+     console.log(error)
+    res.status(400).json({
+      
+        message: "Update Validation Failed",
+          success: false,
+        error
+    })
+  }
 })
 bookRoutes.delete("/:BookId",async (req : Request, res : Response ) => {
 
-   const bookId  = req.params.bookId;
+  try {
+     const bookId  = req.params.bookId;
    
    const data = await Data.findByIdAndDelete(bookId)
 
@@ -73,4 +102,13 @@ bookRoutes.delete("/:BookId",async (req : Request, res : Response ) => {
         message: "Book deleted successfully",
      data
     })
+  } catch (error) {
+     console.log(error)
+    res.status(400).json({
+      
+        message: "Delete Validation Failed",
+          success: false,
+        error
+    })
+  }
 })
