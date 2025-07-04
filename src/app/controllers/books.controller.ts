@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import {  Data } from '../models/books.model';
-import { BorrowBook } from '../models/borrowBook.model';
+
 
 export const bookRoutes = express.Router();
 
@@ -79,7 +79,7 @@ bookRoutes.get("/:bookId",async (req : Request, res : Response ) => {
     })
    }
 })
-bookRoutes.patch("/:bookId",async (req : Request, res : Response ) => {
+bookRoutes.put("/:bookId",async (req : Request, res : Response ) => {
 
   try {
      const bookId  = req.params.bookId;
@@ -102,11 +102,6 @@ bookRoutes.patch("/:bookId",async (req : Request, res : Response ) => {
     })
   }
 })
-
-
-
-
-
 
 
 

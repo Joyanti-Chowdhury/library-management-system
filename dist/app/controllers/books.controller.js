@@ -83,7 +83,7 @@ exports.bookRoutes.get("/:bookId", (req, res) => __awaiter(void 0, void 0, void 
         });
     }
 }));
-exports.bookRoutes.patch("/:bookId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.bookRoutes.put("/:bookId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const bookId = req.params.bookId;
         const updatedBody = req.body;
@@ -103,32 +103,6 @@ exports.bookRoutes.patch("/:bookId", (req, res) => __awaiter(void 0, void 0, voi
         });
     }
 }));
-// bookRoutes.post("/borrow", async (req : Request, res : Response ) => {
-//  try {
-//     const { book: bookId, quantity, dueDate } = req.body;
-//     const book = await Data.findById(bookId);
-//     if (!book) {
-//       return res.status(404).json({ success: false, message: 'Book not found' });
-//     }
-//     if (book.copies < quantity) {
-//       return res.status(400).json({ success: false, message: 'Not enough copies available' });
-//     }
-//     // Update book copies and availability
-//     book.copies -= quantity;
-//     book.updateAvailability();
-//     await book.save();
-//     // Create borrow record
-//     const borrowRecord = await BorrowBook.create({ book: bookId, quantity, dueDate });
-//     return res.status(201).json({
-//       success: true,
-//       message: 'Book borrowed successfully',
-//       data: borrowRecord
-//     });
-//   } catch (error) {
-//     console.error('Borrow error:', error);
-//     return res.status(500).json({ success: false, message: 'Internal server error' });
-//   }
-// })
 exports.bookRoutes.delete("/:BookId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const bookId = req.params.bookId;

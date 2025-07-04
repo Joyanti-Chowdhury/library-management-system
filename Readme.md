@@ -62,23 +62,23 @@ cd library-management-system
 📬 API Endpoints
 
 Books
-GET http://localhost:5000/books – Get all books
+GET http://localhost:5000/api/books – Get all books
 
-POST http://localhost:5000/books/create-book – Add a new book
+POST http://localhost:5000/api/books/create-book – Add a new book
 
-PUT http://localhost:5000/books/:bookId – Update a book
+PUT http://localhost:5000/api/books/:bookId – Update a book
 
-DELETE http://localhost:5000/books/:bookId – Delete a book
+DELETE http://localhost:5000/api/books/:bookId – Delete a book
 
-Members
-GET /api/members – List members
+# Members
+# GET /api/members – List members
 
-POST /api/members – Add member
+# POST /api/members – Add member
 
 Borrowing
 POST /api/borrow – Borrow a book
 
-POST /api/return – Return a book
+GET /api/borrow – see the borrowed  book
 
 (More detailed API documentation can be generated using Swagger/Postman collection)
 

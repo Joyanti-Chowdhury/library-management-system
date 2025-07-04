@@ -17,6 +17,14 @@ const bookSchema = new Schema<IBook>({
     available: {type: Boolean, required: true,
         default: true
     },
+      createdAt: {
+      type: Date,
+      default: Date.now(),
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now(),
+    },
 },
 
 {
@@ -24,5 +32,25 @@ const bookSchema = new Schema<IBook>({
     timestamps: true
 })
 
+bookSchema.pre("save", function (next) {
+  this.available = this.copies > 0;
+  this.updatedAt = new Date();
+  next();
+});
+
+
+
+
+
+bookSchema.statics.availabilityUpdate = async function (
+  bookId: string,
+  quantity: number
+) {
+  const book = await this.findById(bookId);
+  if (!book) throw new Error("Book not found");
+  book.copies -= quantity;
+  book.available = book.copies > 0;
+  await book.save();
+};
 
 export  const Data = model<IBook>("Data", bookSchema)
