@@ -41,7 +41,7 @@ bookRoutes.get("/",async (req : Request, res : Response ) => {
     }
    
     data = await Data.find().sort({createdAt: 1})
-    data = await Data.find().limit(5)
+    // data = await Data.find().limit(5)
 
     res.status(201).json({
         success: true,

@@ -48,7 +48,7 @@ exports.bookRoutes.get("/", (req, res) => __awaiter(void 0, void 0, void 0, func
             data = yield books_model_1.Data.find();
         }
         data = yield books_model_1.Data.find().sort({ createdAt: 1 });
-        data = yield books_model_1.Data.find().limit(5);
+        // data = await Data.find().limit(5)
         res.status(201).json({
             success: true,
             message: "Book retrieved successfully",
