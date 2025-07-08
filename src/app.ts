@@ -12,7 +12,7 @@ app.use(
     origin: 
       [
         "http://localhost:5173",
-        "https://mellifluous-cocada-d99bf4.netlify.app/"
+        "https://mellifluous-cocada-d99bf4.netlify.app"
         
       ],
        

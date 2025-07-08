@@ -11,7 +11,7 @@ const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
     origin: [
         "http://localhost:5173",
-        "https://mellifluous-cocada-d99bf4.netlify.app/"
+        "https://mellifluous-cocada-d99bf4.netlify.app"
     ],
     //  credentials: true,
 }));
