@@ -16,7 +16,7 @@ exports.bookRoutes = void 0;
 const express_1 = __importDefault(require("express"));
 const books_model_1 = require("../models/books.model");
 exports.bookRoutes = express_1.default.Router();
-exports.bookRoutes.post("/create-book", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.bookRoutes.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const body = req.body;
         const data = yield books_model_1.Data.create(body);

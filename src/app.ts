@@ -16,7 +16,7 @@ app.use(
         
       ],
        
-    
+
     //  credentials: true,
   })
 );
@@ -24,11 +24,6 @@ app.use(
 app.use(express.json());
 app.use("/api/books", bookRoutes),
 app.use("/api/borrow", borrowBookRoutes);
-
-
-
-
-
 
 
 app.get('/' ,( req : Request, res : Response, next : NextFunction) => {
