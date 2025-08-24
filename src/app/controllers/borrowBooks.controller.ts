@@ -1,10 +1,11 @@
 import express, { Request, Response } from "express";
 import { Borrow } from '../models/borrowBook.model';
 
+const borrowBookRoutes = express.Router();
 
-export const borrowBookRoutes = express.Router();
 
 borrowBookRoutes.post("/", async (req: Request, res: Response) => {
+  console.log(req.body);
   try {
     const borrow = await Borrow.create(req.body);
     res.status(201).json({
@@ -20,9 +21,11 @@ borrowBookRoutes.post("/", async (req: Request, res: Response) => {
     });
   }
 });
+
+
 borrowBookRoutes.get("/", async (req: Request, res: Response) => {
   try {
-    const BorrowBooks = await Borrow.aggregate([
+    const BorrowBooksSummary = await Borrow.aggregate([
       {
         $group: {
           _id: "$book",
@@ -53,8 +56,8 @@ borrowBookRoutes.get("/", async (req: Request, res: Response) => {
     ]);
     res.status(200).json({
       Success: true,
-      message: "Borrowed books summary retrieved successfully",
-      data: BorrowBooks,
+      message: "Borrowed books updated successfully",
+      data: BorrowBooksSummary,
     });
   } catch (error: any) {
     res.status(error.status || 500).json({
@@ -64,3 +67,5 @@ borrowBookRoutes.get("/", async (req: Request, res: Response) => {
     });
   }
 });
+
+export  {borrowBookRoutes};

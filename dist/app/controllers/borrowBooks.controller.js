@@ -15,8 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.borrowBookRoutes = void 0;
 const express_1 = __importDefault(require("express"));
 const borrowBook_model_1 = require("../models/borrowBook.model");
-exports.borrowBookRoutes = express_1.default.Router();
-exports.borrowBookRoutes.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const borrowBookRoutes = express_1.default.Router();
+exports.borrowBookRoutes = borrowBookRoutes;
+borrowBookRoutes.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.body);
     try {
         const borrow = yield borrowBook_model_1.Borrow.create(req.body);
         res.status(201).json({
@@ -33,9 +35,9 @@ exports.borrowBookRoutes.post("/", (req, res) => __awaiter(void 0, void 0, void 
         });
     }
 }));
-exports.borrowBookRoutes.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+borrowBookRoutes.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const BorrowBooks = yield borrowBook_model_1.Borrow.aggregate([
+        const BorrowBooksSummary = yield borrowBook_model_1.Borrow.aggregate([
             {
                 $group: {
                     _id: "$book",
@@ -66,8 +68,8 @@ exports.borrowBookRoutes.get("/", (req, res) => __awaiter(void 0, void 0, void 0
         ]);
         res.status(200).json({
             Success: true,
-            message: "Borrowed books summary retrieved successfully",
-            data: BorrowBooks,
+            message: "Borrowed books updated successfully",
+            data: BorrowBooksSummary,
         });
     }
     catch (error) {

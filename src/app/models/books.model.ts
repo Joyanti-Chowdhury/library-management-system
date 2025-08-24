@@ -53,4 +53,4 @@ bookSchema.statics.availabilityUpdate = async function (
   await book.save();
 };
 
-export  const Data = model<IBook>("Data", bookSchema)
+export  const Data = model<IBook>("book", bookSchema)

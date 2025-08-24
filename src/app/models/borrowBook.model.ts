@@ -9,7 +9,7 @@ const borrowSchema = new Schema<IBorrowBook>(
   {
     book: {
       type: Schema.Types.ObjectId,
-      ref: "Book",
+      ref: "book",
       required: [true, "Book ID is required"],
     },
     quantity: {
@@ -40,7 +40,7 @@ borrowSchema.post("save", async function () {
   await BookModel.availabilityUpdate(this.book.toString(), this.quantity);
 });
 
-export const Borrow = mongoose.model<IBorrowBook>("Borrow", borrowSchema);
+export const Borrow = mongoose.model<IBorrowBook>("borrowBook", borrowSchema);
 
 
 

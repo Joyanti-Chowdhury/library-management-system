@@ -48,7 +48,7 @@ const books_model_1 = require("./books.model");
 const borrowSchema = new mongoose_1.Schema({
     book: {
         type: mongoose_1.Schema.Types.ObjectId,
-        ref: "Book",
+        ref: "book",
         required: [true, "Book ID is required"],
     },
     quantity: {
@@ -78,7 +78,7 @@ borrowSchema.post("save", function () {
         yield BookModel.availabilityUpdate(this.book.toString(), this.quantity);
     });
 });
-exports.Borrow = mongoose_1.default.model("Borrow", borrowSchema);
+exports.Borrow = mongoose_1.default.model("borrowBook", borrowSchema);
 // import { model, Schema } from "mongoose";
 // import { IBorrowBook } from "../interfaces/borrowBook.interface";
 // const borrowBookSchema = new Schema<IBorrowBook>(

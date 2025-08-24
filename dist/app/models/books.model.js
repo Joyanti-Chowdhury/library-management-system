@@ -53,4 +53,4 @@ bookSchema.statics.availabilityUpdate = function (bookId, quantity) {
         yield book.save();
     });
 };
-exports.Data = (0, mongoose_1.model)("Data", bookSchema);
+exports.Data = (0, mongoose_1.model)("book", bookSchema);
